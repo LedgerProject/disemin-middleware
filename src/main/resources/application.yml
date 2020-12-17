@@ -1,0 +1,17 @@
+name: Thingsboard Proxy
+
+tb:
+  url: ${TB_URL}
+  tenant: ${TB_TENANT}
+  password: ${TB_PASSWORD}
+  jwtKey: ${TB_JWTKEY}
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+springdoc:
+  swagger-ui:
+    operationsSorter: alpha
+    disable-swagger-default-url: true
