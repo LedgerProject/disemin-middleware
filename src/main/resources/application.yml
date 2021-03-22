@@ -1,10 +1,10 @@
 name: Thingsboard Proxy
 
 tb:
-  url: ${TB_URL}
-  tenant: ${TB_TENANT}
-  password: ${TB_PASSWORD}
-  jwtKey: ${TB_JWTKEY}
+  url: "${TB_URL:}"
+  tenant: "${TB_TENANT:}"
+  password: "${TB_PASSWORD:}"
+  jwtKey: "${TB_JWTKEY:}"
   heartbeatMs: 3600000
 
 server:

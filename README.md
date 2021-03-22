@@ -32,7 +32,9 @@ variation in this example.
 
 Make sure to run the server with a valid, at least `512 bit` long, `JWT` *secret key* like so:
 
-`sudo docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always --env JWT_TOKEN_SIGNING_KEY=A_LONG_BASE64_ENCODED_SECRET_KEY thingsboard/tb-postgres`
+```shell
+sudo docker run --name mytb --restart always -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --env JWT_TOKEN_SIGNING_KEY=A_LONG_BASE64_ENCODED_SECRET_KEY thingsboard/tb-postgres
+```
 
 ## Setup
 
@@ -43,7 +45,7 @@ Make sure to run the server with a valid, at least `512 bit` long, `JWT` *secret
 2. Build application with `mvn clean package -DskipTests`
 3. Lastly run it with `java -jar target/agroxm-middleware-VERSION.jar`
 
-You can find more info about the exposed endpoints at `http://localhost:8080/swagger-ui.html`
+You can find more info about the exposed endpoints at http://localhost:8080/swagger-ui.html.
 
 # High level description
 

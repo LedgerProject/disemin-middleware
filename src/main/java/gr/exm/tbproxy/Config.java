@@ -1,19 +1,28 @@
 package gr.exm.tbproxy;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
+
+@Validated
 @Configuration
-@EnableConfigurationProperties
 @ConfigurationProperties(prefix = "tb")
 @EnableScheduling
 public class Config {
 
+    @NotEmpty(message = "TB_URL cannot be empty")
     private String url;
+
+    @NotEmpty(message = "TB_TENANT should be a valid email address")
     private String tenant;
+
+    @NotEmpty(message = "TB_PASSWORD cannot be empty")
     private String password;
+
+    @NotEmpty(message = "TB_JWTKEY cannot be empty")
     private String jwtKey;
 
     public String getUrl() {
