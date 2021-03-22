@@ -36,14 +36,24 @@ Make sure to run the server with a valid, at least `512 bit` long, `JWT` *secret
 sudo docker run --name mytb --restart always -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --env JWT_TOKEN_SIGNING_KEY=A_LONG_BASE64_ENCODED_SECRET_KEY thingsboard/tb-postgres
 ```
 
-## Setup
+## Build & run
 
-1. First you have to update the configuration. There are two approaches depending on your preferences
-    1. Edit the configuration file at `src/main/resources/application.yml` and update the `tb` section of the file with
-       the correct values
-    2. Define the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD` in your system
-2. Build application with `mvn clean package -DskipTests`
-3. Lastly run it with `java -jar target/agroxm-middleware-VERSION.jar`
+### 1. Build Jar and run from command line
+
+1. Define the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD` in your system.
+2. Build application jar file with `mvn clean package -DskipTests`
+3. Run it with `java -jar target/agroxm-middleware-VERSION.jar`
+
+### 2. Build docker image and run with docker
+
+1. Create a `.env` property file with the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD`
+2. Build docker image with `mvn clean spring-boot:build-image -DskipTests`
+3. Run with `docker run docker.io/library/agroxm-middleware:VERSION`, passing the required env variables, e.g.:
+
+```shell
+docker run --name=middleware --detach --restart=always --env-file=.env -p 0.0.0.0:8080:8080 docker.io/library/agroxm-middleware:0.0.1
+```
+
 
 You can find more info about the exposed endpoints at http://localhost:8080/swagger-ui.html.
 
