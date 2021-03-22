@@ -12,7 +12,7 @@
 
     <groupId>gr.exm</groupId>
     <artifactId>agroxm-middleware</artifactId>
-    <version>0.0.3</version>
+    <version>0.1.0</version>
     <name>agroxm-middleware</name>
     <description>AgroXM Spring Boot Middleware Application</description>
 
