@@ -9,7 +9,10 @@ import gr.exm.tbproxy.model.*;
 import gr.exm.tbproxy.thingsboard.client.RestClient;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.thingsboard.server.common.data.Customer;
 import org.thingsboard.server.common.data.Device;
@@ -34,6 +37,7 @@ public class TbRestService implements TbService {
 
     private final RestClient client;
 
+    private final Logger logger = LoggerFactory.getLogger(TbRestService.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final String FIELD_TYPE = "FIELD";
@@ -484,5 +488,13 @@ public class TbRestService implements TbService {
         return objectMapper.createObjectNode()
                 .put("ts", crop.getTimestamp())
                 .<ObjectNode>set("values", objectMapper.createObjectNode().set("crop", telemetry));
+    }
+
+    @Scheduled(fixedRateString = "${tb.heartbeatMs}")
+    private void heartbeat() {
+        logger.warn("Sending a heartbeat request to TB server");
+        PageLink pageLink = new PageLink(25);
+        List<Device> devs = client.getTenantDevices(WS_TYPE, pageLink).getData();
+        logger.info(String.format("There are %d devices available", devs.size()));
     }
 }
