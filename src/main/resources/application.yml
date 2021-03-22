@@ -8,7 +8,7 @@ tb:
   heartbeatMs: 3600000
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   error:
     include-message: always
 
