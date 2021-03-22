@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>gr.exm</groupId>
-	<artifactId>tb-proxy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>tb-proxy</name>
-	<description>A Thingsboard proxy</description>
+	<artifactId>agroxm-middleware</artifactId>
+	<version>0.0.1</version>
+	<name>agroxm-middleware</name>
+	<description>AgroXM Spring Boot Middleware Application</description>
 
 	<properties>
 		<java.version>8</java.version>
@@ -80,6 +80,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+					<finalName>agroxm-middleware</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
