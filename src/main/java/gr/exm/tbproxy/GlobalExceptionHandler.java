@@ -21,7 +21,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({ExpiredJwtException.class, HttpClientErrorException.Unauthorized.class})
     public ResponseEntity<Object> unauthorizedException(Exception ex, HttpServletRequest request) {
-        logger.warn(ex.getMessage());
+        logger.error(ex.getMessage());
+        ex.printStackTrace();
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", new Date());
         map.put("status", HttpStatus.UNAUTHORIZED.value());

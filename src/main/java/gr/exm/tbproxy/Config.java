@@ -3,10 +3,12 @@ package gr.exm.tbproxy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "tb")
+@EnableScheduling
 public class Config {
 
     private String url;
