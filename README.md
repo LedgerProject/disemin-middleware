@@ -51,7 +51,7 @@ sudo docker run --name mytb --restart always -it -p 9090:9090 -p 1883:1883 -p 56
 3. Run with `docker run docker.io/library/agroxm-middleware:VERSION`, passing the required env variables, e.g.:
 
 ```shell
-docker run --name=middleware --detach --restart=always --env-file=.env -p 0.0.0.0:8080:8080 docker.io/library/agroxm-middleware:0.0.2
+docker run --name=middleware --detach --restart=always --env-file=.env -p 0.0.0.0:8080:8080 docker.io/library/agroxm-middleware:0.0.3
 ```
 
 
