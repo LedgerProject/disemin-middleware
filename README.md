@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.0.1-brightgreen)
+![Version](https://img.shields.io/badge/version-0.0.3-brightgreen)
 
 # Introduction
 
@@ -21,7 +21,7 @@ and [Chainlink](https://chain.link/).
 
 This project is written in `Java` and uses `Maven` as the build tool. Be sure that you have
 both [Java 8](https://thingsboard.io/docs/user-guide/install/linux#java)
-and [maven](https://maven.apache.org/download.cgi#) installed in your system.
+and [maven](https://maven.apache.org/download.cgi#) installed in your system. You also need `Docker`, if you want to run the app as a docker container.
 
 ## Thingsboard server
 
@@ -38,22 +38,37 @@ sudo docker run --name mytb --restart always -it -p 9090:9090 -p 1883:1883 -p 56
 
 ## Build & run
 
+### Environment
+
+You need to specify the following env variables:
+
+- `TB_URL` the Thingsboard server URL
+- `TB_TENANT` the Thigsboard tenant email address
+- `TB_PASSWORD` the Thingsboard tenant password
+- `TB_JWTKEY` a super secret key used for JWT token auth
+- `PORT` the port the app server will listen to (defaults to 8080)
+
+
 ### 1. Build Jar and run from command line
 
-1. Define the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD` in your system.
-2. Build application jar file with `mvn clean package -DskipTests`
-3. Run it with `java -jar target/agroxm-middleware-VERSION.jar`
+1. Build application jar file with `mvn clean package -DskipTests`
+2. Run it with `java -jar target/agroxm-middleware-VERSION.jar`, passing also the required env variables, e.g.:
+
+```shell
+TB_URL=xxx TB_JWTKEY=xxx TB_TENANT=xxx TB_PASSWORD=xxx java -jar target/agroxm-middleware-VERSION.jar
+```
 
 ### 2. Build docker image and run with docker
 
-1. Create a `.env` property file with the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD`
+1. Create a `.env` property file with the required environment variables `TB_URL`, `TB_JWTKEY`, `TB_TENANT`, `TB_PASSWORD`, and optionally the `PORT` variable.
 2. Build docker image with `mvn clean spring-boot:build-image -DskipTests`
 3. Run with `docker run docker.io/library/agroxm-middleware:VERSION`, passing the required env variables, e.g.:
 
 ```shell
-docker run --name=middleware --detach --restart=always --env-file=.env -p 0.0.0.0:8080:8080 docker.io/library/agroxm-middleware:0.0.3
+docker run --name=middleware --detach --restart=always --env-file=.env -p 0.0.0.0:8080:8080 docker.io/library/agroxm-middleware:VERSION
 ```
 
+### Read more
 
 You can find more info about the exposed endpoints at http://localhost:8080/swagger-ui.html.
 
