@@ -354,7 +354,7 @@ public class TbRestService implements TbService {
     // Forecast
     @Override
     public List<Device> getAvailableForecasts() {
-        PageLink pageLink = new PageLink(25);
+        PageLink pageLink = new PageLink(500);
         return client.getTenantDevices(VWS_TYPE, pageLink).getData();
     }
 
