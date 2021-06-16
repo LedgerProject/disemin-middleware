@@ -254,7 +254,7 @@ public class TbRestService implements TbService {
     public List<Device> getAvailableDevices(String token) {
         AccessToken accessToken = tokenFromString(token);
 
-        PageLink pageLink = new PageLink(25);
+        PageLink pageLink = new PageLink(500);
         return client.getTenantDevices(WS_TYPE, pageLink).getData();
     }
 
